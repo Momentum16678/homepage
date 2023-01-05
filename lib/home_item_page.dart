@@ -15,15 +15,18 @@ class _HomeItemPageState extends State<HomeItemPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SafeArea(
-        child: Scaffold(
-          body: Column(
+    final fullWidth = MediaQuery.of(context).size.width;
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.only(left: 20, right: 20, top: 30),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const ImageIcon(
                       AssetImage("assets/images/location_icon.png"),
@@ -98,7 +101,7 @@ class _HomeItemPageState extends State<HomeItemPage> {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20),
                 child: Container(
-                  width: 320,
+                  width: fullWidth,
                   height: 40,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -141,8 +144,9 @@ class _HomeItemPageState extends State<HomeItemPage> {
               ),
               const SizedBox(height: 18),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 20.0, right: 20),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
@@ -176,7 +180,9 @@ class _HomeItemPageState extends State<HomeItemPage> {
                         )
                       ],
                     ),
-                    const SizedBox(width: 30,),
+                    const SizedBox(
+                      width: 30,
+                    ),
                     Column(
                       children: [
                         Container(
@@ -209,7 +215,9 @@ class _HomeItemPageState extends State<HomeItemPage> {
                         )
                       ],
                     ),
-                    const SizedBox(width: 30,),
+                    const SizedBox(
+                      width: 30,
+                    ),
                     Column(
                       children: [
                         Container(
@@ -242,7 +250,9 @@ class _HomeItemPageState extends State<HomeItemPage> {
                         )
                       ],
                     ),
-                    const SizedBox(width: 30,),
+                    const SizedBox(
+                      width: 30,
+                    ),
                     Column(
                       children: [
                         Container(
@@ -275,7 +285,9 @@ class _HomeItemPageState extends State<HomeItemPage> {
                         )
                       ],
                     ),
-                    const SizedBox(width: 30,),
+                    const SizedBox(
+                      width: 30,
+                    ),
                     Column(
                       children: [
                         Container(
@@ -314,32 +326,49 @@ class _HomeItemPageState extends State<HomeItemPage> {
               const SizedBox(height: 10),
               const Padding(
                 padding: EdgeInsets.only(left: 20.0),
-                child: Text("Restaurants", style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'Gilroy',
-                  fontSize: 14,
-                ),),
-              ),
-              Expanded(
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: restaurant.map((restaurant) => buildRestaurantCard(context,
-                      image: restaurant.image,
-                      location: restaurant.location,
-                      time: restaurant.time,
-                      rating: restaurant.rating))
-                  .toList(),
+                child: Text(
+                  "Restaurants",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Gilroy',
+                    fontSize: 14,
+                  ),
                 ),
-              )
+              ),
+              Container(
+                height: 100,
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  scrollDirection: Axis.horizontal,
+                  children: restaurant
+                      .map((restaurant) => buildRestaurantCard(context,
+                          image: restaurant.image,
+                          location: restaurant.location,
+                          time: restaurant.time,
+                          rating: restaurant.rating))
+                      .toList(),
+                ),
+              ),
+              Expanded(child: Container())
             ],
           ),
         ),
       ),
     );
   }
-  Widget buildRestaurantCard(BuildContext context, {required String image, required String location, required String time, required String rating}) =>
+
+  Widget buildRestaurantCard(BuildContext context,
+          {required String image,
+          required String location,
+          required String time,
+          required String rating}) =>
       FractionallySizedBox(
-        heightFactor: 0.56,
-        child: RestaurantCard(location: location, time: time, rating: rating, image: image,),
+        // heightFactor: 08,
+        child: RestaurantCard(
+          location: location,
+          time: time,
+          rating: rating,
+          image: image,
+        ),
       );
 }
