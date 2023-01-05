@@ -325,7 +325,7 @@ class _HomeItemPageState extends State<HomeItemPage> {
               ),
               const SizedBox(height: 10),
               const Padding(
-                padding: EdgeInsets.only(left: 20.0),
+                padding: EdgeInsets.only(left: 20.0, bottom: 5),
                 child: Text(
                   "Restaurants",
                   style: TextStyle(
